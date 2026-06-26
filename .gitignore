@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Env / secrets — never commit real values
+.env
+*.env.local
+
+# Docker
+*.log
+
+# Terraform (added ahead of Phase 2.5)
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
