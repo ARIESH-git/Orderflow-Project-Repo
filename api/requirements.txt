@@ -1,0 +1,7 @@
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+kafka-python==2.0.2
+boto3
+PyJWT
+bcrypt
+requests

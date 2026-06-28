@@ -1,0 +1,85 @@
+services:
+  kafka:
+    image: apache/kafka:latest
+    hostname: kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    healthcheck:
+      test: ["CMD", "/opt/kafka/bin/kafka-broker-api-versions.sh", "--bootstrap-server", "kafka:9092"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+  api:
+    build: ./api
+    ports:
+      - "8000:8000"
+    restart: on-failure:3
+    env_file:
+      - .env
+    volumes:
+      - ./api:/app
+    depends_on:
+      kafka:
+        condition: service_healthy
+      dynamodb-local:
+        condition: service_healthy
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    container_name: dynamodb-local
+    user: root
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data"
+    ports:
+      - "8001:8000"
+    volumes:
+      - dynamodb-data:/home/dynamodblocal/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s -o /dev/null http://localhost:8000 || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  inventory-consumer:
+    build: ./consumers/inventory
+    environment:
+       PYTHONUNBUFFERED: 1
+    depends_on:
+      kafka:
+        condition: service_healthy
+      dynamodb-local:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./consumers/inventory:/app
+  notification-consumer:
+    build: ./consumers/notification
+    environment:
+       PYTHONUNBUFFERED: 1
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./consumers/notification:/app
+volumes:
+  dynamodb-data:
