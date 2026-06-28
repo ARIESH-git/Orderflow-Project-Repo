@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dynamodb-local
+spec:
+  selector:
+    app: dynamodb-local
+  ports:
+    - port: 8000
+      targetPort: 8000

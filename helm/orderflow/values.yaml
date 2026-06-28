@@ -1,0 +1,15 @@
+api:
+  image: orderflow-api:latest
+  port: 8000
+inventoryConsumer:
+  image: orderflow-inventory-consumer:latest
+notificationConsumer:
+  image: orderflow-notification-consumer:latest
+kafka:
+  image: apache/kafka:latest
+  storage: 1Gi
+dynamodb:
+  image: amazon/dynamodb-local:latest
+  storage: 1Gi
+redis:
+  image: redis:7-alpine
