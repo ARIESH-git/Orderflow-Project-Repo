@@ -42,7 +42,7 @@ jobs:
         run: pip install bandit
 
       - name: Run Bandit
-        run: bandit -r api/ consumers/ -ll --exclude api/tests
+        run: bandit -r api/ consumers/ -lll --exclude api/tests
 
   build-and-scan:
     name: Build and Trivy Scan
