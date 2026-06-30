@@ -15,7 +15,7 @@ spec:
             (
               sum(rate(http_requests_total{handler="/orders",status=~"5.."}[2m]))
               /
-              sum(rate(http_requests_total{handler="/orders"}[2m]))
+              (sum(rate(http_requests_total{handler="/orders"}[2m])) > 0)
             )
             or
             vector(0)
