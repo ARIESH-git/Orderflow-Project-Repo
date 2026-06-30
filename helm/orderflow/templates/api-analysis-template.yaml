@@ -12,6 +12,10 @@ spec:
         prometheus:
           address: http://prometheus-server.monitoring.svc.cluster.local
           query: |
-            sum(rate(http_requests_total{handler="/orders",status=~"5.."}[2m]))
-            /
-            sum(rate(http_requests_total{handler="/orders"}[2m]))
+            (
+              sum(rate(http_requests_total{handler="/orders",status=~"5.."}[2m]))
+              /
+              sum(rate(http_requests_total{handler="/orders"}[2m]))
+            )
+            or
+            vector(0)
