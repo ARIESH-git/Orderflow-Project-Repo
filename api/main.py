@@ -16,6 +16,7 @@ from auth import (
     verify_state,
     exchange_code_for_github_user,
 )
+from prometheus_fastapi_instrumentator import Instrumentator
 class AuthRequest(BaseModel):
     username: str
     password: str
@@ -25,6 +26,7 @@ async def lifespan(app: FastAPI):
     ensure_users_table()
     yield
 app = FastAPI(lifespan=lifespan)
+Instrumentator().instrument(app).expose(app)
 producer = KafkaProducer(
     bootstrap_servers="kafka:9092",
     value_serializer=lambda v: json.dumps(v).encode("utf-8")
@@ -76,6 +78,9 @@ def github_callback(code: str, state: str):
     return {"access_token": token, "token_type": "bearer"}
 @app.post("/orders")
 def create_order(item: str, quantity: int, current_user: str = Depends(get_current_user)):
+    import random
+    if random.random() < 0.5:
+        raise HTTPException(status_code=500, detail="Simulated bad deploy failure")
     with open("/tmp/debug.log", "a") as f:
         f.write("ORDER ROUTE HIT\n")
     order_id = str(uuid.uuid4())
