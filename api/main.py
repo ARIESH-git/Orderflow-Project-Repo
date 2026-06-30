@@ -78,9 +78,6 @@ def github_callback(code: str, state: str):
     return {"access_token": token, "token_type": "bearer"}
 @app.post("/orders")
 def create_order(item: str, quantity: int, current_user: str = Depends(get_current_user)):
-    import random
-    if random.random() < 0.5:
-        raise HTTPException(status_code=500, detail="Simulated bad deploy failure")
     with open("/tmp/debug.log", "a") as f:
         f.write("ORDER ROUTE HIT\n")
     order_id = str(uuid.uuid4())
