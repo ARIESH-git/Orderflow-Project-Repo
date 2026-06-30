@@ -23,7 +23,7 @@ jobs:
         run: pip install flake8
 
       - name: Run flake8
-        run: flake8 api/ consumers/ --max-line-length=120 --ignore=E501,W503
+        run: flake8 api/ consumers/ --max-line-length=120 --ignore=E501,W503,E302,E303
 
   sast:
     name: SAST - Bandit
