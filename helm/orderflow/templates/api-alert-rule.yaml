@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-alert-rules
+  namespace: monitoring
+  labels:
+    prometheus: kube-prometheus
+data:
+  api-alerts.yml: |
+    groups:
+      - name: orderflow-api
+        rules:
+          - alert: HighAPIErrorRate
+            expr: |
+              (
+                sum(rate(http_requests_total{handler="/orders",status=~"5.."}[2m]))
+                /
+                (sum(rate(http_requests_total{handler="/orders"}[2m])) > 0)
+              ) > 0.1
+            for: 30s
+            labels:
+              severity: critical
+            annotations:
+              summary: "High error rate on /orders endpoint"
+              description: "Error rate is above 10% for the last 30 seconds"
