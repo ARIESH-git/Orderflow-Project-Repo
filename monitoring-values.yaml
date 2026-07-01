@@ -1,0 +1,29 @@
+prometheus:
+  prometheusSpec:
+    retention: 1d
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 512Mi
+alertmanager:
+  alertmanagerSpec:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+prometheusOperator:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+nodeExporter:
+  enabled: false
+grafana:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  persistence:
+    enabled: false

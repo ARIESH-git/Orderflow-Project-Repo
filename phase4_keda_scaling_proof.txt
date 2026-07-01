@@ -1,0 +1,37 @@
+NAME                                    REFERENCE                          TARGETS     MINPODS   MAXPODS   REPLICAS   AGE
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      0/5 (avg)   1         8         1          3h49m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   0/5 (avg)   1         8         1          3h49m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      40/5 (avg)   1         8         1          3h50m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   40/5 (avg)   1         8         1          3h50m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   10/5 (avg)   1         8         4          3h50m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      10/5 (avg)   1         8         4          3h50m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   5/5 (avg)    1         8         8          3h51m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      5/5 (avg)    1         8         8          3h51m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   <unknown>/5 (avg)   1         8         8          3h51m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      <unknown>/5 (avg)   1         8         8          3h51m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   <unknown>/5 (avg)   1         8         8          3h52m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      <unknown>/5 (avg)   1         8         8          3h52m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      <unknown>/5 (avg)   1         8         8          3h52m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   5/5 (avg)           1         8         8          3h52m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      5/5 (avg)           1         8         8          3h52m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      40/5 (avg)          1         8         1          3h53m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   20/5 (avg)          1         8         2          3h53m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      10/5 (avg)          1         8         4          3h53m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   10/5 (avg)          1         8         4          3h53m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      5/5 (avg)           1         8         8          3h53m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   5/5 (avg)           1         8         8          3h53m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   <unknown>/5 (avg)   1         8         8          3h54m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      <unknown>/5 (avg)   1         8         8          3h54m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   <unknown>/5 (avg)   1         8         8          3h58m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      <unknown>/5 (avg)   1         8         8          3h59m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   <unknown>/5 (avg)   1         8         2          3h59m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      <unknown>/5 (avg)   1         8         1          3h59m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   <unknown>/5 (avg)   1         8         2          4h
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      <unknown>/5 (avg)   1         8         1          4h1m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      <unknown>/5 (avg)   1         8         1          4h1m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   <unknown>/5 (avg)   1         8         2          4h2m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   <unknown>/5 (avg)   1         8         2          4h4m
+keda-hpa-notification-consumer-scaler   Deployment/notification-consumer   20/5 (avg)          1         8         2          4h5m
+keda-hpa-inventory-consumer-scaler      Deployment/inventory-consumer      40/5 (avg)          1         8         1          4h5m
+STATUS                                  REASON                             MESSAGE
+Failure                                 InternalError                      an error on the server ("unable to decode an event from the watch stream: http2: client connection lost") has prevented the request from succeeding

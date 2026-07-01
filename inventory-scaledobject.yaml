@@ -1,0 +1,19 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: inventory-consumer-scaler
+spec:
+  scaleTargetRef:
+    name: inventory-consumer
+  pollingInterval: 10
+  cooldownPeriod: 60
+  minReplicaCount: 1
+  maxReplicaCount: 8
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: kafka.default.svc.cluster.local:9092
+        consumerGroup: inventory-group
+        topic: order-placed
+        lagThreshold: "5"
+        offsetResetPolicy: latest

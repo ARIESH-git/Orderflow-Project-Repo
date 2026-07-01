@@ -5,3 +5,4 @@ boto3
 PyJWT
 bcrypt
 requests
+prometheus-fastapi-instrumentator
